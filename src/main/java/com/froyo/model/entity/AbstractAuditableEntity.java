@@ -10,7 +10,8 @@ import static com.froyo.model.entity.ContextKey.AUDIT_LOGIN;
 import static com.froyo.model.entity.ContextKey.AUDIT_PROGRAM_NAME;
 
 @Data
-public class AbstractAuditableEntity {
+@MappedSuperclass
+public abstract class AbstractAuditableEntity {
 
     @Embedded
     @AttributeOverrides({
