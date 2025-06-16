@@ -11,11 +11,11 @@ public abstract class AbstractConverter<E, D> {
 
     public List<E> fromDto(List<D> dtos) {
         if (dtos == null) return null;
-        return dtos.stream().map(dto -> fromDto(dto)).collect(Collectors.toList());
+        return dtos.stream().map(this::fromDto).collect(Collectors.toList());
     }
 
     public List<D> fromEntity(List<E> entities) {
         if (entities == null) return null;
-        return entities.stream().map(entity -> fromEntity(entity)).collect(Collectors.toList());
+        return entities.stream().map(this::fromEntity).collect(Collectors.toList());
     }
 }
