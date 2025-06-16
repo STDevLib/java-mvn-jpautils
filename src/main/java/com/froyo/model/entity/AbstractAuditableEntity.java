@@ -29,16 +29,22 @@ public abstract class AbstractAuditableEntity {
     })
     private AuditRecord auditRecordUpdate;
 
+    private AuditRecord buildAuditRecord() {
+        return new AuditRecord(
+                LocalDateTime.now(),
+                ThreadContext.get(AUDIT_LOGIN),
+                ThreadContext.get(AUDIT_PROGRAM_NAME)
+        );
+    }
+
     @PrePersist
     public void insertAutoSetting(){
-        setAuditRecordInsert(new AuditRecord(LocalDateTime.now(), //
-                ThreadContext.get(AUDIT_LOGIN),ThreadContext.get(AUDIT_PROGRAM_NAME)));
+        setAuditRecordInsert(buildAuditRecord());
     }
 
     @PreUpdate
     public void updateAutoSetting(){
-        setAuditRecordUpdate(new AuditRecord(LocalDateTime.now(), //
-                ThreadContext.get(AUDIT_LOGIN),ThreadContext.get(AUDIT_PROGRAM_NAME)));
+        setAuditRecordUpdate(buildAuditRecord());
     }
 
 }
